@@ -2,7 +2,6 @@
 // Genetic Algorithm, Evolbing Shakespeare
 // https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js/tree/master/chp09_ga/NOC_9_01_GA_Shakespeare
 
-
 // need to describe pseudo-DNA
 // For this example, a virtual organism's DNA is an array of characters
 // Functionality:
@@ -11,9 +10,8 @@
 //  - mate DNA with another set of DNA
 //  - mutate DNA
 
-// name: newChar
-// purpose: generate a new character within
-// the proper range of ASCI values
+
+// generate a new character within the proper range of ASCI values
 function newChar() {
   var c = floor(random(63, 122))
   if (c == 63) c = 32;
@@ -47,7 +45,8 @@ function DNA(num) {
     this.fitness = score / target.length;
   }
 
-  //Crossover function
+  // Combine two members of the population together
+  // currently uses a random midpoint for the two (can be changed)
   this.crossover = function(partner) {
     //create new child
     var child = new DNA(this.genes.length);
@@ -72,5 +71,4 @@ function DNA(num) {
       }
     }
   }
-
 }

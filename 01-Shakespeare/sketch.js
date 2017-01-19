@@ -1,10 +1,7 @@
 // Based on Daniel Shiffman's Nature of Code
-// Genetic Algorithm, Evolbing Shakespeare
+// Genetic Algorithm, Evolving Shakespeare
 // https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js/tree/master/chp09_ga/NOC_9_01_GA_Shakespeare
 
-
-// describe the population of virual organisms
-// in this case, each organism is an instance of the DNA object
 
 var target,
     popmax,
@@ -15,22 +12,20 @@ var target,
     stats;
 
 function setup() {
+  // build a population with the following requirements
+  target = "To be or not to be.";
+  popmax = 300;
+  mutationRate = 0.01;
+  population = new Population(target, mutationRate, popmax);
+
+  // Create DOM nodes
   bestPhrase = createP("Best phrase:");
   bestPhrase.class("best");
-
   allPhrases = createP("All phrases:");
   allPhrases.position(600, 10);
   allPhrases.class("all");
-
   stats = createP("Stats");
   stats.class("stats");
-
-  target = "To be or not to be.";
-  popmax = 1000;
-  mutationRate = 0.01;
-
-  // Create population
-  population = new Population(target, mutationRate, popmax);
 }
 
 function draw() {
@@ -40,13 +35,13 @@ function draw() {
   population.generate();
   //Calculate Fitness
   population.calcFitness();
+  //Evaluate the best fitness in the population
   population.evaluate();
-
   // if target phrase is found, stop
   if (population.isFinished()) {
     noLoop();
   }
-
+  //update the DOM
   displayInfo();
 }
 
